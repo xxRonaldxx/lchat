@@ -6,7 +6,7 @@
 standard-app-packages
 autopublish
 insecure
-accounts-ui
 accounts-github
 bootstrap
 jquery
+accounts-ui
