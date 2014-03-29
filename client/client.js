@@ -3,10 +3,13 @@
 */
 
 // TODO - Get the PSET ID from a dropdown
+Session.set("pset", 0);
+
+
 
 Template.messages.messages = function () {
     // TODO - Adjust this to only find messages in the pset selected.s
-    return Messages.find({}, { sort: { time: -1 }});
+    return Messages.find({psetid:Session.get("pset")}, { sort: { time: -1 }});
 }
 
 Template.input.events = {
@@ -26,6 +29,7 @@ Template.input.events = {
                 //TODO - add a property for the pset id
                 Messages.insert({
                     name: name,
+                    psetid:Session.get("pset"),
                     message: message.value,
                     time: Date.now()
                 });
@@ -34,6 +38,9 @@ Template.input.events = {
                 message.value = '';
             }
         }
+    },
+    'change select#pset' : function (event) {
+        Session.set("pset", document.getElementById('pset').value);
     }
 }
 
